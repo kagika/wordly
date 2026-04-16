@@ -1,0 +1,266 @@
+ span{
+  font-family: "Bitcount Grid Double", system-ui;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+} 
+body{
+    overflow-x: hidden;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+
+}
+*{
+    box-sizing:border-box ;
+    margin:0;
+    padding:0;
+}
+li{
+    list-style: none;
+}
+.search-area{
+    background-image: url('wordlybg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+    width: 100vw; 
+    padding: 5px;
+    position: relative;
+    z-index: 0;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+/* Added a blur effect */
+.overlay{
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    right:0 ;
+    left: 0;
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+/* Styling for the Welcome text */
+.welcome-text {
+    max-width: 400px;
+    color: #1a1a1a;
+    transform: translateY(100px);
+    animation: fadeInUp 2s ease forwards;
+    text-align: center;
+}
+
+.welcome-text h1 {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.welcome-text p {
+    font-size: 18px;
+    color: #555;
+}
+
+.search-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 30px;
+    z-index: 2;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+  border-radius: 60px;
+  background: white;
+  gap: 8px;
+  padding:10px 20px;
+  backdrop-filter: blur(100px) saturate(180%);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform:translateY(100px) ;
+  animation: fadeInUp 2s ease forwards;
+}
+
+.input-row input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline:none;
+    padding:24px 20px;
+    font-size: 20px;
+    color:black;
+    width: 100%;
+}
+
+.input-row button svg{
+    width: 30px;
+}
+
+.input-row button{
+    border: 0;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    transition: 0.3s ease;
+
+}
+.input-row button:hover{
+    transform: scale(1.1);
+}
+
+
+::placeholder{
+    color: grey;
+}
+
+
+.errors{
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 3px;
+    font-family: sans-serif;
+    color: black;
+}
+
+
+
+.searched-word {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition:  0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Styling for cards */
+
+.card-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    
+}
+
+.card{
+    border-radius: 20px;
+    height: 300px;
+    padding :40px 30px;
+    overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition:  0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+   
+}
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card p:first-child {
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    color: #4a6cf7;
+}
+.card p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: #444;
+}
+.card:hover{
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* Added  a scrollbar for overflowing content */
+.card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+#savedWordsContainer {
+    padding: 20px 40px;
+}
+
+#savedWordsList li {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+#savedWordsList li:hover {
+    background: #eee;
+}
+.app-layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: #ffffff;
+    border-right: 1px solid #eee;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* Saved words list */
+#savedWordsList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#savedWordsList li {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+#savedWordsList li:hover {
+    background: #f0f3ff;
+    color: #4a6cf7;
+}
+main{
+    flex: 1;
+    overflow-y: auto;
+}

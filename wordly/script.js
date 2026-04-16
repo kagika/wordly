@@ -1,13 +1,14 @@
-
 const api = "https://api.dictionaryapi.dev/api/v2/entries/en/"
 
 // This gets user input and search button
 word = document.getElementById('word')
 searchButton = document.getElementById("search")
-errormsg = document.getElementById("errormsg")
 
 // This identifies the container
 wordContainer = document.getElementById("wordContainer")
+
+// Retrieveing errormessage tag
+errormsg = document.getElementById("errormsg")
 
 // function for retreiveing data from dictionaryApi
 
@@ -25,67 +26,71 @@ async function fetchWord(userInput){
 }
 
 // function for accessing information about searched words
-
 function displayDefinitions(data){
     try{
-        if (data.title ==="No Definitions Found" ){
-            errormsg.textContent = data.message
-        }
-        console.log(data)
+        wordContainer.innerHTML = ""
 
+        if (data.title === "No Definitions Found"){
+            errormsg.textContent = data.message
+            return
+        }
+        searchedWord = data[0].word
+        wordName = document.createElement("h1")
+        wordName.textContent = searchedWord
+        wordContainer.appendChild(wordName)
+        console.log(wordContainer)
         for (let index = 0; index < data.length; index++) {
             const wordElement = data[index];
-            wordName.textContent = wordElement.word
-            wordElement.meanings.forEach(individualWord=>{
-
-                // ptag for parts of speech
-                partofspeechtag = document.createElement("p")
-                partofspeechtag.textContent = individualWord.partOfSpeech
-                wordContainer.appendChild(partofspeechtag)
-
-
-            for (let index = 0; index < individualWord.definitions.length;index++){
-                individualDefinition = individualWord.definitions[index].definition
-                console.log(individualDefinition)
-                    // ptage for definitions
-                    def = document.createElement('p')
-                    def.textContent = individualDefinition
-                    partofspeechtag.appendChild(def)
-
-                    // Condition if there are examples
-                    individualExample = individualWord.definitions[index].example
-                    if (individualExample){
-                        // ptag for individual example
-                        example = document.createElement('p')
-                        example.textContent = `"${individualExample}"`
-                        def.after(example)
-                        console.log(example)
-                    }
-
-                }
             
 
-            }) 
+            wordElement.meanings.forEach(individualWord => {
 
+              
+                const posDiv = document.createElement("div")
 
-    }
+                // Part of speech tag
+                const partofspeechtag = document.createElement("p")
+                partofspeechtag.textContent = individualWord.partOfSpeech
+                posDiv.appendChild(partofspeechtag)
+
+                // limited to 4 defintions at a time 
+                const sliced = individualWord.definitions.slice(0, 4)
+
+                sliced.forEach((item) => {
+                    // Definition
+                    const def = document.createElement('p')
+                    def.textContent = item.definition
+                    posDiv.appendChild(def)
+
+                    // Example (if it exists)
+                    if (item.example) {
+                        const example = document.createElement('p')
+                        example.textContent = `"${item.example}"`
+                        posDiv.appendChild(example)
+                    }
+                })
+               
+                wordContainer.appendChild(posDiv)
+                
+                console.log(wordContainer)
+            })
+        }
     }
     catch(error){
-        console.log()
+        console.log(error)
     }
-
 }
 
 // Event listener for the button when user inputs
 searchButton.addEventListener('click', function(){
-    wordContainer.textContent = ""
+    errormsg.textContent = ""
+    wordContainer.innerHTML = "" 
     storedWord = word.value 
     if (!storedWord ){
         errormsg.textContent = "Please input a word"
     }
-    fetchWord(storedWord)
+   return fetchWord(storedWord)
         .then(displayDefinitions)
 
 }
 )
-

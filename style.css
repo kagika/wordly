@@ -1,71 +1,75 @@
+body {
+  overflow-x: hidden;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: #f5f7fa;
+  color: #1a1a1a;
+}
 
-body{
-    overflow-x: hidden;
-    font-family: "Inter", system-ui, -apple-system, sans-serif;
-    background: #f5f7fa;
-    color: #1a1a1a;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+li {
+  list-style: none;
 }
-*{
-    box-sizing:border-box ;
-    margin:0;
-    padding:0;
+
+/* ── Search area ─────────────────────────────────────────────────────────── */
+.search-area {
+  background-image: url('wordlybg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  width: 100vw;
+  padding: 5px;
+  position: relative;
+  z-index: 0;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
 }
-li{
-    list-style: none;
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  backdrop-filter: blur(10px);
+  z-index: 1;
 }
-.search-area{
-    background-image: url('wordlybg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 80vh;
-    width: 100vw; 
-    padding: 5px;
-    position: relative;
-    z-index: 0;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-}
-/* Added a blur effect */
-.overlay{
-    position:absolute;
-    top: 0;
-    bottom: 0;
-    right:0 ;
-    left: 0;
-    backdrop-filter: blur(10px);
-    z-index: 1;
-}
-/* Styling for the Welcome text */
+
+/* ── Welcome text ────────────────────────────────────────────────────────── */
 .welcome-text {
-    max-width: 400px;
-    color: #1a1a1a;
-    transform: translateY(100px);
-    animation: fadeInUp 2s ease forwards;
-    text-align: center;
+  max-width: 400px;
+  color: #1a1a1a;
+  transform: translateY(100px);
+  animation: fadeInUp 2s ease forwards;
+  text-align: center;
 }
 
 .welcome-text h1 {
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .welcome-text p {
-    font-size: 18px;
-    color: #555;
+  font-size: 18px;
+  color: #555;
 }
 
-.search-input{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    gap: 30px;
-    z-index: 2;
+/* ── Search input ────────────────────────────────────────────────────────── */
+.search-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 30px;
+  z-index: 2;
 }
 
 .input-row {
@@ -76,194 +80,323 @@ li{
   border-radius: 60px;
   background: white;
   gap: 8px;
-  padding:10px 20px;
-  backdrop-filter: blur(100px) saturate(180%);
+  padding: 10px 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   opacity: 0;
-  transform:translateY(100px) ;
+  transform: translateY(100px);
   animation: fadeInUp 2s ease forwards;
 }
 
-.input-row input{
-    background: transparent;
-    flex: 1;
-    border: 0;
-    outline:none;
-    padding:24px 20px;
-    font-size: 20px;
-    color:black;
-    width: 100%;
+.input-row input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 24px 20px;
+  font-size: 20px;
+  color: black;
+  width: 100%;
 }
 
-.input-row button svg{
-    width: 30px;
+.input-row button {
+  border: 0;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
-.input-row button{
-    border: 0;
-    border-radius: 50%;
-    height: 60px;
-    width: 60px;
-    transition: 0.3s ease;
-
-}
-.input-row button:hover{
-    transform: scale(1.1);
+.input-row button:hover {
+  transform: scale(1.1);
 }
 
-
-::placeholder{
-    color: grey;
+.input-row button svg {
+  width: 30px;
 }
 
-
-.errors{
-    display: inline-block;
-    text-align: center;
-    letter-spacing: 3px;
-    font-family: sans-serif;
-    color: black;
+::placeholder {
+  color: grey;
 }
 
+/* ── Loading spinner ─────────────────────────────────────────────────────── */
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(0,0,0,0.15);
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error message ───────────────────────────────────────────────────────── */
+.errors {
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 3px;
+  font-family: sans-serif;
+  color: black;
+}
+
+/* ── Word header (name + phonetic + audio) ───────────────────────────────── */
+.word-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 30px 40px 0;
+  flex-wrap: wrap;
+}
 
 .searched-word {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 32px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    transition:  0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-/* Styling for cards */
-
-.card-container{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    gap: 30px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 40px;
-    
+.phonetic-text {
+  font-size: 20px;
+  color: #888;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-.card{
-    border-radius: 20px;
-    height: 300px;
-    padding :40px 30px;
-    overflow-y: auto;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition:  0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s ease forwards;
-   
-}
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card p:first-child {
-    font-weight: 600;
-    text-transform: capitalize;
-    margin-bottom: 10px;
-    color: #4a6cf7;
-}
-.card .definition {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
-    margin-bottom: 4px;
-    padding-left: 10px;
-    border-left: 3px solid #4a6cf7;
+/* ── Audio button ────────────────────────────────────────────────────────── */
+.audio-btn {
+  background: #4a6cf7;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: 0.3s;
+  flex-shrink: 0;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-.card .example {
-    font-size: 13px;
-    color: #888;
-    font-style: italic;
-    background: #f0f3ff;
-    border-radius: 8px;
-    padding: 6px 10px;
-    margin-bottom: 10px;
-}
-.card:hover{
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+.audio-btn:hover {
+  transform: scale(1.1);
+  background: #3a5ce5;
 }
 
-/* Added  a scrollbar for overflowing content */
+/* Card container*/
+.card-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 30px 40px;
+}
+
+/* ── Individual card ─────────────────────────────────────────────────────── */
+.card {
+  border-radius: 20px;
+  min-height: 200px;
+  max-height: 360px;
+  padding: 30px 25px 20px;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
 .card::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .card::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
+  background: #ccc;
+  border-radius: 10px;
 }
 
-#savedWordsContainer {
-    padding: 20px 40px;
+/*  Part of speech tag */
+.pos-tag {
+  font-weight: 700;
+  text-transform: capitalize;
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
-#savedWordsList li {
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-    transition: 0.2s;
+/* ── Definition ──────────────────────────────────────────────────────────── */
+.card .definition {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  padding-left: 10px;
+  border-left: 3px solid #4a6cf7;
+  margin-bottom: 2px;
 }
 
-#savedWordsList li:hover {
-    background: #eee;
+/* ── Example ─────────────────────────────────────────────────────────────── */
+.card .example {
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+  background: #f0f3ff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
 }
+
+/* ── Synonym / Antonym chips ─────────────────────────────────────────────── */
+.chips-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.chips-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+}
+
+.chip {
+  padding: 3px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  user-select: none;
+}
+
+.chip-syn {
+  background: #e8f0fe;
+  color: #4a6cf7;
+}
+
+.chip-syn:hover {
+  background: #4a6cf7;
+  color: white;
+}
+
+.chip-ant {
+  background: #fde8e8;
+  color: #e74c3c;
+}
+
+.chip-ant:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*  App layout  */
 .app-layout {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 /* Sidebar */
 .sidebar {
-    width: 260px;
-    background: #ffffff;
-    border-right: 1px solid #eee;
-    padding: 20px;
-    overflow-y: auto;
+  width: 220px;
+  background: #ffffff;
+  border-right: 1px solid #eee;
+  padding: 20px 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .sidebar h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
 }
 
 /* Saved words list */
 #savedWordsList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 #savedWordsList li {
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
 }
 
 #savedWordsList li:hover {
-    background: #f0f3ff;
-    color: #4a6cf7;
-}
-main{
-    flex: 1;
-    overflow-y: auto;
+  background: #f0f3ff;
+  color: #4a6cf7;
 }
 
+#savedWordsList li span {
+  flex: 1;
+  cursor: pointer;
+}
+
+/*  Delete button */
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+}
+
+/*  Empty saved state*/
+.empty-saved {
+  font-size: 13px;
+  color: #bbb;
+  text-align: center;
+  margin-top: 16px;
+}
+
+
+main {
+  flex: 1;
+  overflow-y: auto;
+}

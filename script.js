@@ -70,12 +70,16 @@ function displayDefinitions(data){
                     // Definition
                     const def = document.createElement('p')
                     def.textContent = item.definition
+                    // Styling for definitions
+                    def.classList.add('definition') 
                     card.appendChild(def)
 
                     // Example (if it exists)
                     if (item.example) {
                         const example = document.createElement('p')
                         example.textContent = `"${item.example}"`
+                        // Styling for examples
+                        example.classList.add('example')
                         card.appendChild(example)
                     }
                 })

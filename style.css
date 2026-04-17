@@ -1,14 +1,4 @@
- span{
-  font-family: "Bitcount Grid Double", system-ui;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0.5,
-    "ELSH" 0,
-    "ELXP" 0;
-} 
+
 body{
     overflow-x: hidden;
     font-family: "Inter", system-ui, -apple-system, sans-serif;
@@ -187,11 +177,23 @@ li{
     margin-bottom: 10px;
     color: #4a6cf7;
 }
-.card p {
+.card .definition {
     font-size: 14px;
+    color: #333;
     line-height: 1.6;
-    margin-bottom: 8px;
-    color: #444;
+    margin-bottom: 4px;
+    padding-left: 10px;
+    border-left: 3px solid #4a6cf7;
+}
+
+.card .example {
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+    background: #f0f3ff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
 }
 .card:hover{
     transform: translateY(-8px) scale(1.02);
@@ -264,3 +266,4 @@ main{
     flex: 1;
     overflow-y: auto;
 }
+
